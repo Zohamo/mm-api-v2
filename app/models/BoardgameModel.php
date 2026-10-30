@@ -183,4 +183,28 @@ class BoardgameModel extends AbstractModel
                 ->toArray()->select()
         );
     }
+
+    /**
+     * Renvoie le premier modèle trouvé.
+     *
+     * @param  string $slug
+     * @return mixed[]|boolean Renvoie `false` si aucun modèle ne correspond aux critères demandés.
+     */
+    public function get(string $slug)
+    {
+        $res = $this->where("bg_boardgames.slug = '$slug'")
+            ->limit(1)
+            ->allFull();
+        if (empty($res)) {
+            return false;
+        }
+        $bg = $res[0];
+        $bg['mechanisms'] = array_map(
+            function ($mechanism) {
+                return ['name' => $mechanism];
+            },
+            explode(', ', $bg['mechanisms'])
+        );
+        return $bg;
+    }
 }

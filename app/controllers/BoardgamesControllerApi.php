@@ -41,7 +41,7 @@ class BoardgamesControllerApi
      */
     public function get(string $slug)
     {
-        $res = $this->model->first($slug);
+        $res = $this->model->get($slug);
         if (empty($res)) {
             HttpUtils::jsonResponse(null, 404);
         } else {
