@@ -14,17 +14,7 @@ use Core\Router;
  * exemple : "roles/{id:\d+}/modifier", ici 'id' n'accepte que les chiffres.
  */
 
-// Alertes
-Router::get("api/alerts", "Tools\AlertsControllerApi", "getAll");
-
-// Logs
-Router::api("api/logs", "LogsControllerApi", AppConstants::ID_ROLE_DEV);
-
-// Users
-Router::api("api/users", "UsersControllerApi", AppConstants::ID_ROLE_ADMIN);
-
 // Boardgames
-Router::api("api/boardgames", "BoardgamesControllerApi");
-
-// Plays
-Router::api("api/plays", "PlaysControllerApi");
+Router::get("boardgames/{slug}/plays", "PlaysControllerApi", "getAllByBoardgame");
+Router::get("boardgames/{slug}", "BoardgamesControllerApi", "get");
+Router::get("boardgames", "BoardgamesControllerApi", "getAll");

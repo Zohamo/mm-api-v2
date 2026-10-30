@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Controllers;
+use App\Functions\HttpUtils;
 use App\Models\BoardgameModel;
-use Core\AbstractControllerApi;
 
-class BoardgamesControllerApi extends AbstractControllerApi
+class BoardgamesControllerApi
 {
     /**
      * Modèle associé au contrôleur.
@@ -15,20 +14,36 @@ class BoardgamesControllerApi extends AbstractControllerApi
     protected $model;
 
     /**
-     * Noms des actions permettant d'identifier les formulaires pour la récupération des jetons CSRF.
-     * @var string[]
-     */
-    protected $actions;
-
-    /**
      * Crée une instance du contrôleur et définit ses propriétés.
      */
     public function __construct()
     {
         $this->model = new BoardgameModel();
-        $this->actions = array_fill_keys(
-            ['create', 'update'],
-            (new BoardgamesController)->actions['updateOrCreate']
-        );
+    }
+
+    /**
+     * Renvoie une liste de toutes les ressources.
+     *
+     * @route("/boardgames", methods={"GET"})
+     */
+    public function getAll(array $req)
+    {
+        HttpUtils::jsonResponse($this->model->all());
+    }
+
+    /**
+     * Renvoie la ressource spécifiée.
+     *
+     * @param  string $slug
+     * @route("/boardgames/{slug}", methods={"GET"})
+     */
+    public function get(string $slug)
+    {
+        $res = $this->model->first($slug);
+        if (empty($res)) {
+            HttpUtils::jsonResponse(null, 404);
+        } else {
+            HttpUtils::jsonResponse($res);
+        }
     }
 }
