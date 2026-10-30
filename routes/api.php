@@ -15,6 +15,6 @@ use Core\Router;
  */
 
 // Boardgames
-Router::get("boardgames/{slug}/plays", "PlaysControllerApi", "getAllByBoardgame");
+Router::get("boardgames/{slug}/plays", "BoardgamesPlaysControllerApi", "getAllByBoardgame");
 Router::get("boardgames/{slug}", "BoardgamesControllerApi", "get");
 Router::get("boardgames", "BoardgamesControllerApi", "getAll");

@@ -53,4 +53,24 @@ class PlayModel extends AbstractModel
         return $this->fields('pla_id', 'fk_bg_id', 'pla_date', 'pla_json_content')
             ->order("pla_date DESC")->select();
     }
+
+    /**
+     * Renvoie la liste de tous les modèles associés à un Boardgame.
+     *
+     * @param  int $bgId
+     * @return mixed[]
+     */
+    public function allByBoardgame(int $bgId)
+    {
+        return array_map(
+            function ($play) {
+                $play = json_decode($play['pla_json_content']);
+                return $play;
+            },
+            $this->fields('pla_id AS id', 'pla_date AS date', 'pla_json_content')
+                ->where("fk_bg_id = :bgId")
+                ->order("pla_date ASC")
+                ->toArray()->select(['bgId' => $bgId])
+        );
+    }
 }
