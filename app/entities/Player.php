@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Entities;
+
+use Core\AbstractDTO;
+
+class Player extends AbstractDTO
+{
+    public int $player_id;
+    public string $player_name;
+}
