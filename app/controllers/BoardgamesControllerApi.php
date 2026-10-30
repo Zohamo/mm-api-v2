@@ -28,7 +28,9 @@ class BoardgamesControllerApi
      */
     public function getAll(array $req)
     {
-        HttpUtils::jsonResponse($this->model->all());
+        HttpUtils::jsonResponse(isset($req['full'])
+            ? $this->model->allFull()
+            : $this->model->all());
     }
 
     /**
