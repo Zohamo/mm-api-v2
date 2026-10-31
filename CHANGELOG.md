@@ -1,10 +1,16 @@
 # Changelog
 
-## [Unreleased]
-
 ## [2.0.0] - 2026-10-30
 
-Initialisation de l'application avec le **Générateur Tela**.
+### Added
+
+- Boardgames API: get
+- Boardgames API: getAll + full
+- BoardgamesPlays API: get
+
+### Fixed
+
+- TelaCore: issue with various leftJoinin model requests
 
 ## Formatage
 
