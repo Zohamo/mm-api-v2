@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0] - 2026-10-30
+## [2.0.0] - 2026-11-01
 
 ### Added
 
@@ -10,7 +10,9 @@
 
 ### Fixed
 
-- TelaCore: issue with various leftJoinin model requests
+- Tela/Autoloader: issues loading classes
+- Tela/HttpUtils: CORS policy
+- Tela/QueryBuilderSqlClausesTrait: issue with various leftJoin in model requests
 
 ## Formatage
 
